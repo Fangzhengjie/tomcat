@@ -57,12 +57,15 @@ public class Localizer {
         try {
             if (bundle != null) {
                 errMsg = bundle.getString(errCode);
+                if(errMsg !=null){
+                    try {
+                        errMsg = new String(errMsg.getBytes("ISO-8859-1"),"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-            try {
-                errMsg = new String(errMsg.getBytes("ISO-8859-1"),"UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+
         } catch (MissingResourceException e) {
         }
         return errMsg;
